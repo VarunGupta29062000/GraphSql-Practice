@@ -1,0 +1,60 @@
+query userDetails{
+users{
+  id
+  firstName
+  lastName
+  email
+}
+}
+
+
+query QuotesDetails{
+  quotes{
+    name
+    by
+  }
+  
+}
+
+# Query to get a specific user userDetails
+
+query GetUserById{
+  user(id:"111"){
+    firstName
+    lastName
+    quotes{
+      name
+    }
+  }
+}
+
+
+#query to get the data of the users as well as the quotes that are written by each user
+
+query userDetails{
+users{
+  id
+  firstName
+  lastName
+  email
+  quotes{
+    name
+  }
+}
+}
+
+
+# query to get a specific user using query parameters
+
+query GetUserByIdByQueryParam($uid:ID!){
+  user(id:$uid){
+    firstName
+    lastName
+    quotes{
+      name
+    }
+  }
+}
+
+
+OYnWYpBSYOkr5wSc
