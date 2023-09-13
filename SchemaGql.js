@@ -1,46 +1,43 @@
-import { gql } from "apollo-server-core";
-
+import { gql } from "apollo-server";
 const typeDefs = gql`
   type Query {
-    user(_id: ID!): User
     users: [User]
-    quotes: [Quotes]
+    user(_id: ID!): User
+    quotes: [Quote]
+    iquote(by: ID!): [Quote]
   }
-
   type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    password: String
-    quotes: [Quotes]
+    _id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    quotes: [Quote]
+  }
+  type Quote {
+    name: String!
+    by: ID!
   }
 
-  type Quotes {
-    name: String
-    by: ID
-  }
-
-  type Token{
-    token:String
+  type Token {
+    token: String!
   }
 
   type Mutation {
-    signupUser(userNew: userInput!): User
-    signinUser(userSignin: userSignInInput!): Token
+    signupUser(userNew: UserInput!): User
+    signinUser(userSignin: UserSigninInput!): Token
+    createQuote(name: String!): String
   }
 
-  input userInput {
+  input UserInput {
     firstName: String!
     lastName: String!
     email: String!
     password: String!
   }
-
-  input userSignInInput {
+  input UserSigninInput {
     email: String!
     password: String!
   }
 `;
-
 export default typeDefs;
