@@ -7,14 +7,14 @@ const User = mongoose.model("User");
 const Quote = mongoose.model("Quote");
 
 const resolvers = {
-  // Query: {
-  //   users: () => users,
-  //   user: (_, { _id }) => users.find((user) => user._id === _id),
-  //   quotes: () => quotes,
-  // },
-  // User: {
-  //   quotes: (ur) => quotes.filter((q) => q.by == ur._id),
-  // },
+  Query: {
+    users: async () => await User.find({}),
+    user: async (_, { _id }) => await User.findOne({ _id }),
+    quotes: async () => await Quote.find({}),
+  },
+  User: {
+    quotes: async (ur) => await Quote.find({ by: ur._id }),
+  },
   Mutation: {
     signupUser: async (_, { userNew }) => {
       // const _id = randomBytes(5).toString("hex");
